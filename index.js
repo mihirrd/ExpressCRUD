@@ -1,15 +1,16 @@
-const http = require("http")
-const url = require("url")
+import express from "express";
+import bodyParser from "body-parser";
 
-const Server = http.createServer((req,res)=>{
+const app = express()
+const PORT = 5000
 
-    const parsedUrl = url.parse(req.url, true)
-    const path = parsedUrl.pathname
+app.use(bodyParser.json())
 
-    console.log("request received on " + path)
-    res.end("Hello world")
+app.get('/',(req,res)=>{
+    console.log("Running")
+    res.send("Hello world")
 })
 
-Server.listen(3000, ()=>{
-    console.log("Server is running on port 3000")
+app.listen(PORT, ()=>{
+    console.log(`Server running on http://localhost:${PORT}`)
 })
